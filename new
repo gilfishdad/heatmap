@@ -1,0 +1,33 @@
+class BaseWidget:
+    def __init__(self, data):
+        self.data = data
+    
+    def render(self):
+        raise NotImplementedError("Subclass must implement abstract method")
+    
+    def update_data(self, new_data):
+        self.data = new_data
+        self.render()
+class HeatMap(BaseWidget):
+    def render(self):
+        # Implement rendering logic for heatmap
+        print("Rendering HeatMap with data:", self.data)
+
+
+class ChangeOfStateScatter(BaseWidget):
+    def render(self):
+        # Implement rendering logic for change of state scatter plot
+        print("Rendering ChangeOfStateScatter with data:", self.data)
+
+
+class WidgetManager:
+    def __init__(self):
+        self.widgets = []
+    
+    def add_widget(self, widget):
+        if isinstance(widget, BaseWidget):
+            self.widgets.append(widget)
+    
+    def render_widgets(self):
+        for widget in self.widgets:
+            widget.render()
