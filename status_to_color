@@ -1,0 +1,54 @@
+import pandas as pd
+from bokeh.models import Slider, Div, ColumnDataSource, CustomJS
+from bokeh.plotting import figure, show, output_notebook, curdoc
+from bokeh.layouts import column, row
+
+# Sample DataFrame for illustration purposes
+data = {
+    'ESMFOV_Functional_Status_0': [2, 0, 1, 3],
+    'ESMFOV_Functional_Status_1': [1, 2, 0, 1],
+    'ESMFOV_Functional_Status_2': [0, 3, 1, 2],
+    'ESMFOV_Functional_Status_3': [2, 0, 1, 3],
+    'MFAFOV_Functional_Status_0': [3, 1, 0, 2],
+    'MFAFOV_Functional_Status_1': [2, 0, 1, 3],
+    'Overall_Functional_Status': [1, 2, 3, 0],
+}
+
+df = pd.DataFrame(data)
+
+# Assuming a status_to_color mapping exists, like so:
+# This is just an example. Adjust the mapping based on your actual data values and desired colors.
+status_to_color = {
+    0: 'red',
+    1: 'green',
+    2: 'blue',
+    3: 'yellow'
+}
+
+class SliderDivWidget:
+    def __init__(self, data):
+        self.df = pd.DataFrame(data)
+        self.slider = Slider(start=0, end=len(self.df)-1, value=0, step=1, title="Row Selector")
+        
+        # Initialize Divs
+        self.divs = [Div(text=f"{col}: {self.df[col][0]}", width=200, height=30, style={'padding': '10px', 'border-radius': '5px', 'background-color': status_to_color[self.df[col][0]]}) for col in self.df.columns]
+
+        # Slider update callback
+        self.slider.on_change('value', self.update_colors)
+
+    def update_colors(self, attr, old, new):
+        current_row = self.df.iloc[new]
+        for i, col in enumerate(self.df.columns):
+            value = current_row[col]
+            color = status_to_color.get(value, 'white')
+            self.divs[i].style = {'background-color': color, 'color': 'black' if color != 'white' else 'grey', 'padding': '10px', 'border-radius': '5px'}
+            self.divs[i].text = f"{col}: {value}"
+
+    def show(self):
+        output_notebook()
+        layout = column(self.slider, row(*self.divs))
+        show(layout)
+
+# Example usage
+slider_div_widget = SliderDivWidget(data)
+slider_div_widget.show()
