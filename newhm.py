@@ -38,12 +38,12 @@ for i, sub_df in enumerate(sub_df_list):
     # Show the heatmap
     plt.show()
 ```
-This will create a heatmap for each sub-DataFrame, with the color palette and scaling range that you defined. The `vmin` and `vmax` parameters of the `sns.heatmap()` function are used to set the minimum and maximum values of the color scale.
+#This will create a heatmap for each sub-DataFrame, with the color palette and scaling range that you defined. The `vmin` and `vmax` parameters of the `sns.heatmap()` function are used to set the minimum and maximum values of the color scale.
 
-You can also use the `cbar_fmt` parameter to format the color bar labels.
+#You can also use the `cbar_fmt` parameter to format the color bar labels.
 
-You can also use the `ax` parameter of the `sns.heatmap()` function to specify the axis object, this way you can use the same axis object for all the heatmaps, and they will share the same x and y labels.
+#You can also use the `ax` parameter of the `sns.heatmap()` function to specify the axis object, this way you can use the same axis object for all the heatmaps, and they will share the same x and y labels.
 
-You can also use the `plt.rcParams` to set the color palette and scaling range for all the heatmaps.
+#You can also use the `plt.rcParams` to set the color palette and scaling range for all the heatmaps.
 
 Please let me know if you have any other questions.
