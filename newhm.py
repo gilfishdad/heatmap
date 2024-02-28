@@ -46,4 +46,4 @@ for i, sub_df in enumerate(sub_df_list):
 
 #You can also use the `plt.rcParams` to set the color palette and scaling range for all the heatmaps.
 
-Please let me know if you have any other questions.
+#Please let me know if you have any other questions.
