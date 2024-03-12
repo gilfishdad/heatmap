@@ -1,0 +1,48 @@
+The error message "ValueError: Matplotlib pane does not support objects of type 'Matplotlib'" indicates that you are trying to use a Matplotlib object in a context where it is not supported. This error can occur when you try to use a Matplotlib object as a widget in a GUI application, such as PyQt or Tkinter.
+
+To fix this error, you will need to convert the Matplotlib object to a widget that is compatible with the GUI framework you are using. One way to do this is to use the matplotlib.widgets.Widget class, which allows you to create a widget that displays a Matplotlib figure.
+
+Here is an example of how you can use the Widget class to create a widget that displays a Matplotlib figure:
+
+import matplotlib.pyplot as plt
+from matplotlib.widgets import Widget
+
+# Create a figure and add a plot
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [1, 2, 3])
+
+# Create a widget that displays the figure
+widget = Widget(fig)
+
+# Add the widget to a GUI application
+# For example, in PyQt:
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
+app = QApplication([])
+window = QMainWindow()
+window.setCentralWidget(widget)
+window.show()
+app.exec_()
+
+Alternatively, you can use the matplotlib.backends.backend_qt.QtFigureCanvas class to create a widget that displays a Matplotlib figure. This class is specifically designed for use with PyQt, and it provides a more seamless integration with the GUI framework.
+
+from matplotlib.backends.backend_qt import QtFigureCanvas
+
+# Create a figure and add a plot
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3], [1, 2, 3])
+
+# Create a widget that displays the figure
+canvas = QtFigureCanvas(fig)
+
+# Add the widget to a GUI application
+# For example, in PyQt:
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
+app = QApplication([])
+window = QMainWindow()
+window.setCentralWidget(canvas)
+window.show()
+app.exec_()
+
+By using the Widget class or the QtFigureCanvas class, you can create a widget that displays a Matplotlib figure and integrate it seamlessly with your GUI application.
